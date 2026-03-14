@@ -25,15 +25,15 @@ def get_chat_response(chat_model, messages, system_prompt):
 
         # Create system prompt with context
         system_prompt = f"""
-You are an AI assistant.
+        {system_prompt}
 
-Use the following context to answer the question.
+        Use the following context to answer the question.
 
-Context:
-{context}
+        Context:
+        {context}
 
-If the answer is not in the context, answer based on your knowledge.
-"""
+        If the answer is not in the context, answer based on your knowledge.
+        """
 
         # Prepare messages
         formatted_messages = [SystemMessage(content=system_prompt)]
@@ -137,10 +137,18 @@ def instructions_page():
 def chat_page():
     """Main chat interface page"""
     st.title("🤖 AI ChatBot")
-    
-    # Get configuration from environment variables or session state
-    # Default system prompt
-    system_prompt = ""
+
+    # Response mode selector
+    response_mode = st.radio(
+    "Select Response Mode",
+    ["Concise", "Detailed"]
+    )
+
+    # Default system prompt based on mode
+    if response_mode == "Concise":
+       system_prompt = "You are a helpful AI assistant. Give short and concise answers."
+    else:
+       system_prompt = "You are a helpful AI assistant. Provide detailed and thorough explanations."
     
     
     # Determine which provider to use based on available API keys
