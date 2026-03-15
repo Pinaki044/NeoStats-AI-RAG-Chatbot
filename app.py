@@ -135,8 +135,10 @@ def instructions_page():
     """)
 
 def chat_page():
+
     """Main chat interface page"""
-    st.title("🤖 AI ChatBot")
+    st.title("🤖 AI Tools Navigator")
+    st.caption("Ask about AI tools and how to use them.")
 
     # Response mode selector
     response_mode = st.radio(
@@ -146,9 +148,28 @@ def chat_page():
 
     # Default system prompt based on mode
     if response_mode == "Concise":
-       system_prompt = "You are a helpful AI assistant. Give short and concise answers."
+       system_prompt = """
+       You are an AI Tools Guide.
+
+       Help users discover AI tools and understand what they do.
+
+       Give short answers that:
+       • briefly explain the tool
+       • mention its main use
+       • keep the answer within 2 sentences.
+       """
     else:
-       system_prompt = "You are a helpful AI assistant. Provide detailed and thorough explanations."
+       system_prompt = """
+       You are an AI Tools Guide that helps users explore and understand AI tools.
+
+       When answering:
+       • explain what the tool does
+       • describe its main use cases
+       • explain how users can use it
+       • mention alternatives if relevant
+
+       Provide a detailed explanation with examples.
+       """
     
     
     # Determine which provider to use based on available API keys
